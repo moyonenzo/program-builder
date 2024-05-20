@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  program-builder:
+    image: program-builder:latest
+    container_name: program-builder
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:5173"
+    networks:
+      - program-builder
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    entrypoint: [ "pnpm", "dev" ]
+
+networks:
+  program-builder:
